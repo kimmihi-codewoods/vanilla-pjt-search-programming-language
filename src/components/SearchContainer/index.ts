@@ -1,7 +1,6 @@
 import Component from "../../core/Component";
 
 interface Props {
-  searchInputValue: string;
   onChange: (newText: string) => void;
 }
 
@@ -11,10 +10,9 @@ export default class SearchContainer extends Component {
   }
 
   template(): string {
-    const { searchInputValue } = this.props;
     return `
         <form>
-            <input class="Search__input"  value="${searchInputValue}"  />
+            <input class="Search__input" />
             <button class="Search__button">search</button>
         </form>
       `;
@@ -23,7 +21,7 @@ export default class SearchContainer extends Component {
   componentDidMount(): void {
     const searchInput = document.querySelector(".Search__input");
 
-    searchInput.addEventListener("input", (e) => {
+    searchInput.addEventListener("keyup", (e) => {
       const { onChange } = this.props;
       const target = e.target as HTMLInputElement;
       onChange(target.value);

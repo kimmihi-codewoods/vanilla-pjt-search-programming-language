@@ -23,6 +23,7 @@ export default class Component {
 
   setState(newState: any) {
     this._state = { ...this._state, ...newState };
+    this.render();
   }
 
   template() {

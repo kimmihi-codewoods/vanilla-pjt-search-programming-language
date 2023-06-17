@@ -24,9 +24,7 @@ export default class App extends Component {
   componentDidMount(): void {
     const searchContainer = document.querySelector(".Search__container");
     new SearchContainer(searchContainer, {
-      searchInputValue: this.state.searchInputValue,
-      onChange: (newText: string) =>
-        this.setState({ searchInputValue: newText }),
+      onChange: (newText: string) => console.log(newText),
     });
   }
 }
