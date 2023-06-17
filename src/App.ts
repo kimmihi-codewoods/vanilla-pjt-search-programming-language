@@ -1,5 +1,7 @@
 import Component from "./core/Component";
 
+import { getLanguages } from "./api/index";
+
 import SearchContainer from "./components/SearchContainer/index";
 
 interface State {
@@ -17,14 +19,18 @@ export default class App extends Component {
   template(): string {
     return `
     <h1>Search Programming Languages</h1>
-    <section class="Search__container"></section
+    <section class="Search__container"></section>
     `;
   }
 
   componentDidMount(): void {
     const searchContainer = document.querySelector(".Search__container");
     new SearchContainer(searchContainer, {
-      onChange: (newText: string) => console.log(newText),
+      onChange: (newText: string) => {
+        getLanguages(newText).then((res) => {
+          console.log(res);
+        });
+      },
     });
   }
 }

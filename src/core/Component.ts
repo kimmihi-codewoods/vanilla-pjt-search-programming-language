@@ -16,13 +16,8 @@ export default class Component {
     return this._state;
   }
 
-  set state(newState) {
-    this._state = { ...this._state, ...newState };
-    this.render();
-  }
-
-  setState(newState: any) {
-    this._state = { ...this._state, ...newState };
+  set state(newState: any) {
+    this._state = { ...this.state, ...newState };
     this.render();
   }
 
