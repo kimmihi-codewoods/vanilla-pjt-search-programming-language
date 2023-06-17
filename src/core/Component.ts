@@ -1,20 +1,28 @@
 export default class Component {
   target: Element;
   props: any;
-  state: any;
+  _state: any;
 
-  constructor(target: Element, props?: any) {
+  constructor(target: Element, initialState: any, props?: any) {
     this.target = target;
     this.props = props;
-    this.state = {};
+    this._state = initialState;
 
     this.render();
     this.componentDidMount();
   }
 
-  setState(newState: any) {
-    this.setState = { ...this.state, newState };
+  get state(): any {
+    return this._state;
+  }
+
+  set state(newState) {
+    this._state = { ...this._state, ...newState };
     this.render();
+  }
+
+  setState(newState: any) {
+    this._state = { ...this._state, ...newState };
   }
 
   template() {
