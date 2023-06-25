@@ -3,7 +3,7 @@ import Component from "../../core/Component";
 interface State {}
 
 interface Props {
-  onChange: (newText: string) => void;
+  onChange: (e: Event) => void;
 }
 
 export default class SearchInputContainer extends Component<State, Props> {
@@ -21,8 +21,7 @@ export default class SearchInputContainer extends Component<State, Props> {
 
     const input = this.target.querySelector(".Search__input");
     input.addEventListener("keyup", (e) => {
-      const { value } = e.target as HTMLInputElement;
-      this.props.onChange(value);
+      return this.props.onChange(e);
     });
   }
 }
