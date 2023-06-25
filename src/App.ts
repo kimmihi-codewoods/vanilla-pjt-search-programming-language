@@ -59,7 +59,9 @@ export default class App extends Component<State, undefined> {
 
   handleChangeKeyword(e: KeyboardEvent) {
     if (e.key === "ArrowDown") {
-      const list = this.target.querySelector("li");
+      const list = this.target
+        .querySelector(".Search__result-container")
+        .querySelector("li");
       list?.focus();
       return;
     }

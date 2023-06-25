@@ -19,7 +19,6 @@ export default class SearchResultContainer extends Component<State, Props> {
 
   render() {
     const { languageList } = this.props;
-
     this.target.innerHTML = `
       <ul>
         ${languageList.map(
@@ -60,9 +59,5 @@ export default class SearchResultContainer extends Component<State, Props> {
         return;
       }
     });
-
-    // list[0]?.addEventListener("focus", (e) => {
-    //   console.log(e);
-    // });
   }
 }
