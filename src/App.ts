@@ -82,6 +82,8 @@ export default class App extends Component<State, undefined> {
   }
 
   handleSubmitKeyword(keyword: string) {
+    console.log("fn@@@@");
+
     const newRecentKeywordList = this.state.recentKeywordList ?? [];
     if (newRecentKeywordList.length >= 5) {
       newRecentKeywordList.shift();

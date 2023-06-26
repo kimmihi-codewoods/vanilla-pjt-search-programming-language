@@ -1,5 +1,7 @@
 import Component from "../../core/Component";
 
+import debounce from "../../utils/debounce";
+
 interface State {}
 
 interface Props {
@@ -20,8 +22,10 @@ export default class SearchInputContainer extends Component<State, Props> {
     `;
 
     const input = this.target.querySelector(".Search__input");
-    input.addEventListener("keyup", (e) => {
-      return this.props.onChange(e);
+
+    const handleKeyUp = debounce((e: Event) => {
+      this.props.onChange(e);
     });
+    input.addEventListener("keyup", handleKeyUp);
   }
 }
