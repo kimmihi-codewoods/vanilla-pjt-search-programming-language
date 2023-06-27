@@ -10,10 +10,14 @@ dotenv.config({
 
 module.exports = (env) => {
   return {
-    entry: "./src/index.ts",
+    entry: {
+      main: "./src/index.ts",
+      sw: "./src/service-worker.js",
+    },
     output: {
-      filename: "main.js",
+      filename: "[name].bundle.js",
       path: path.resolve(__dirname, "dist"),
+      publicPath: "/",
     },
     module: {
       rules: [
