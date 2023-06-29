@@ -2,6 +2,8 @@ import Component from "./core/Component";
 
 import { getLanguages } from "./api/index";
 
+import { setItem, getItem } from "./utils/localStorage";
+
 import RecentKeywordContainer from "./components/RecentKeywordContainer/index";
 import SearchInputContainer from "./components/SearchInputContainer/index";
 import SearchResultContainer from "./components/SearchResultContainer/index";
@@ -26,13 +28,28 @@ export default class App extends Component<State, undefined> {
     super(target);
   }
 
+  initialize() {
+    const languageList = getItem("RESULT");
+
+    if (languageList) {
+      this.setState({ ...this.state, languageList });
+    }
+  }
+
   render() {
+    this.initialize();
+
     this.target.innerHTML = `
       <h1>Search Programming Languages</h1>
       <section class="Recent__keyword-list"></section>
       <section class="Search__input-container"></section>
       <section class="Search__result-container"></section>
     `;
+
+    window.addEventListener("load", () => {
+      const input = document.querySelector("input");
+      input.focus();
+    });
 
     new RecentKeywordContainer(
       this.target.querySelector(".Recent__keyword-list"),
@@ -77,6 +94,7 @@ export default class App extends Component<State, undefined> {
       );
       return;
     }
+    setItem("SEARCH", value);
 
     this.loadNewLanguageList(value);
   }
@@ -101,6 +119,7 @@ export default class App extends Component<State, undefined> {
     try {
       const response = await getLanguages(keyword);
       this.setState({ ...this.state, languageList: response });
+      setItem("RESULT", response);
       new SearchResultContainer(
         this.target.querySelector(".Search__result-container"),
         {

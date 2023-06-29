@@ -1,5 +1,6 @@
 import Component from "../../core/Component";
 
+import { getItem } from "../../utils/localStorage";
 import debounce from "../../utils/debounce";
 
 interface State {}
@@ -21,11 +22,19 @@ export default class SearchInputContainer extends Component<State, Props> {
       </form>
     `;
 
-    const input = this.target.querySelector(".Search__input");
+    const input = this.target.querySelector(
+      ".Search__input"
+    ) as HTMLInputElement;
+    const lastKeyword = getItem("SEARCH");
+
+    if (lastKeyword) {
+      input.value = lastKeyword;
+    }
 
     const handleKeyUp = debounce((e: Event) => {
       this.props.onChange(e);
     });
+
     input.addEventListener("keyup", handleKeyUp);
   }
 }
